@@ -5,7 +5,7 @@ export class Pawn {
     private type: number;
     private owner: number;
 
-    private meleeAtk: number;
+    private contactAtk: number;
     private rangeAtk: number;
     private defense: number;
     private currentLife: number;
@@ -17,12 +17,12 @@ export class Pawn {
     private selected: boolean;
 
 
-    constructor($name: string, $type: number, $owner: number, $meleeAtk: number, $rangeAtk: number, $defense: number,
-                $currentLife: number, $maxLife: number, $level: number, $exp: number, $selected: boolean) {
+    constructor($name: string, $type: number, $owner: number, $contactAtk: number, $rangeAtk: number, $defense: number,
+        $currentLife: number, $maxLife: number, $level: number, $exp: number, $selected: boolean) {
         this.name = $name;
         this.type = $type;
         this.owner = $owner;
-        this.meleeAtk = $meleeAtk;
+        this.contactAtk = $contactAtk;
         this.rangeAtk = $rangeAtk;
         this.defense = $defense;
         this.currentLife = $currentLife;
@@ -58,12 +58,12 @@ export class Pawn {
     }
 
 
-    public get $meleeAtk(): number {
-        return this.meleeAtk;
+    public get $contactAtk(): number {
+        return this.contactAtk;
     }
 
-    public set $meleeAtk(value: number) {
-        this.meleeAtk = value;
+    public set $contactAtk(value: number) {
+        this.contactAtk = value;
     }
 
 
@@ -121,12 +121,12 @@ export class Pawn {
     }
 
 
-	public get $selected(): boolean {
-		return this.selected;
-	}
+    public get $selected(): boolean {
+        return this.selected;
+    }
 
-	public set $selected(value: boolean) {
-		this.selected = value;
-	}
-    
+    public set $selected(value: boolean) {
+        this.selected = value;
+    }
+
 }

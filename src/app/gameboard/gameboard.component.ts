@@ -60,19 +60,29 @@ export class GameboardComponent implements OnInit {
             let iOld = this.selectedPawn['i'];
             let jOld = this.selectedPawn['j'];
 
-            console.log("coucou");
-
             if (!this.isCurrentPlayerPawn(i, j) && this.isAValidContactAttack(i, j, iOld, jOld)) {
-                // this.attack()
+                this.contactAttack(this.selectedPawn['pawn'], this.pawns[i][j], i, j);
+                this.gameInfoService.switchPlayer();
             }
         }
 
     }
 
-    isAValidContactAttack(i: number, j: number, iOld: number, jOld: number): boolean {
 
+    contactAttack(attackingPawn: Pawn, targetPawn: Pawn, i: number, j: number) {
+        console.log(attackingPawn);
+        console.log(targetPawn);
+
+        const diff = attackingPawn.$contactAtk - targetPawn.$defense;
+        const dmg = diff > 0 ? attackingPawn.$contactAtk - targetPawn.$defense : 0;
+
+        this.pawns[i][j].$currentLife -= dmg;
+
+    }
+
+    isAValidContactAttack(i: number, j: number, iOld: number, jOld: number): boolean {
         if (this.pawns[i][j]) {
-            return true; // TODO : à continuer + gérer le "disabled" sur le choix des formes quand pawnSelected = true
+            return true;
         } else {
             console.log("Error : this.pawns[i][j] undefined");
             return false;
