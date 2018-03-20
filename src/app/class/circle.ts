@@ -1,0 +1,21 @@
+import { Pawn } from './pawn'
+
+export class Circle extends Pawn {
+
+	constructor(owner: number, level: number) {
+
+        switch(level) {
+            case 1:
+                super("circle", 2, owner, 1, 2, 1, 3, 3, level, 0, false)
+                break;
+            case 2:
+                super("circle2", 2, owner, 1, 3, 1, 5, 5, level, 0, false)
+                break;
+            case 3:
+                super("circle3", 2, owner, 2, 5, 2, 8, 8, level, 0, false)
+                break;
+        }
+
+	}
+    
+}

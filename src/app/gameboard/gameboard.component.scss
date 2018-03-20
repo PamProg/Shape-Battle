@@ -1,0 +1,74 @@
+
+// ----- Building the grid 
+.board {
+
+    position: relative;
+    left: 40%;
+
+    display: table;
+    width: 10%;
+
+    border: 6px solid rgb(40, 40, 40);
+}
+
+.board-game {
+    display: table-row-group;
+}
+
+.board-row {
+    display: table-row;
+}
+
+.board-cell {
+    border: 3px solid #999999;
+	display: table-cell;
+    padding: 20px 40px;
+
+    position: relative; // Useful to have .life {position: absolute}
+}
+
+.to-hide {
+    visibility: hidden;
+}
+
+.frontier-bottom {
+    border-bottom: 5px solid purple;
+}
+
+.frontier-top {
+    border-top: 5px solid purple;
+}
+
+// ----- END Building the grid 
+
+
+.over-pawn:hover {
+    background-color: rgba(200, 200, 255, 0.4);
+    cursor: pointer;
+}
+
+.pawn-selected {
+    background-color: rgba(100, 100, 255, 0.6);
+    cursor: pointer;
+}
+
+.player-one {
+    color: green;
+}
+
+.player-two {
+    color: red;
+}
+
+
+.life {
+
+    // background-color: powderblue; // debug
+
+    font-weight: bold;
+    
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 2%;
+}
