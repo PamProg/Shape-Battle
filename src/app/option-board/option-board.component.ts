@@ -17,10 +17,14 @@ export class OptionBoardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.pawnSelected = this.userInputService.isPawnSelected();
     }
 
     shapeSelected(shape: string) {
-        this.userInputService.setSelectedNewPawn(shape);
+        if (!this.pawnSelected) {
+            this.userInputService.setSelectedNewPawn(shape);
+
+        }
     }
 
 }

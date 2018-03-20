@@ -28,6 +28,7 @@ export class UserInputService {
 
     setPawnSelected(value: boolean) {
         this.pawnSelected = value;
+        this.pawnSelectedSubject.next(value);
     }
 
     isNewPawnSelected() {
