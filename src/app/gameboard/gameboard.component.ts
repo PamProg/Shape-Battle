@@ -63,6 +63,10 @@ export class GameboardComponent implements OnInit {
             if (!this.isCurrentPlayerPawn(i, j) && this.isAValidContactAttack(i, j, iOld, jOld)) {
                 this.contactAttack(this.selectedPawn['pawn'], this.pawns[i][j], i, j);
 
+                if (this.pawns[i][j].$currentLife <= 0) {
+                    this.pawns[i][j] = null;
+                }
+
                 this.pawns[iOld][jOld].$selected = false;
                 this.userInputService.setPawnSelected(false);
 
@@ -74,16 +78,12 @@ export class GameboardComponent implements OnInit {
 
 
     contactAttack(attackingPawn: Pawn, targetPawn: Pawn, i: number, j: number) {
-        // console.log(attackingPawn);
-        // console.log(targetPawn);
-
         const diff = attackingPawn.$contactAtk - targetPawn.$defense;
         const dmg = diff > 0 ? attackingPawn.$contactAtk - targetPawn.$defense : 0;
 
         this.pawns[i][j].$currentLife -= dmg;
 
         this.selectedPawn = null;
-
     }
 
     isAValidContactAttack(i: number, j: number, iOld: number, jOld: number): boolean {
