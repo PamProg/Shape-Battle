@@ -10,6 +10,8 @@ export class Pawn {
     private defense: number;
     private currentLife: number;
     private maxLife: number;
+    private currentMovement: number;
+    private maxMovement: number;
 
     private level: number;
     private exp: number;
@@ -18,7 +20,9 @@ export class Pawn {
 
 
     constructor($name: string, $type: number, $owner: number, $contactAtk: number, $rangeAtk: number, $defense: number,
-        $currentLife: number, $maxLife: number, $level: number, $exp: number, $selected: boolean) {
+        $currentLife: number, $maxLife: number, $currentMovement: number, $maxMovement: number, $level: number, $exp: number,
+        $selected: boolean) {
+
         this.name = $name;
         this.type = $type;
         this.owner = $owner;
@@ -27,6 +31,8 @@ export class Pawn {
         this.defense = $defense;
         this.currentLife = $currentLife;
         this.maxLife = $maxLife;
+        this.currentMovement = $currentMovement;
+        this.maxMovement = $maxMovement;
         this.level = $level;
         this.exp = $exp;
         this.selected = $selected;
@@ -100,6 +106,24 @@ export class Pawn {
 
     public set $maxLife(value: number) {
         this.maxLife = value;
+    }
+
+
+    public get $currentMovement(): number {
+        return this.currentMovement;
+    }
+
+    public set $currentMovement(value: number) {
+        this.currentMovement = value;
+    }
+
+
+    public get $maxMovement(): number {
+        return this.maxMovement;
+    }
+
+    public set $maxMovement(value: number) {
+        this.maxMovement = value;
     }
 
 

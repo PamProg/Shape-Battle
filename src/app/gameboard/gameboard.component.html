@@ -2,22 +2,25 @@
     <div class="board-game">
         <div class="board-row" *ngFor="let row of Arr(rows).fill(1); let i = index">
             <div class="board-cell" *ngFor="let column of Arr(columns).fill(1); let j = index" (click)="onCellClicked(i, j)" 
-                                    [ngClass]="{'frontier-bottom': i == 2, 
-                                                'frontier-top': i == 3, 
+                                    [ngClass]="{'frontier-bottom': i == (this.setupService.getRows() / 2)-1, 
+                                                'frontier-top': i == (this.setupService.getRows() / 2), 
                                                 'over-pawn': pawns[i][j] && !pawns[i][j]?.$selected && isCurrentPlayerPawn(i, j),
                                                 'pawn-selected': pawns[i][j]?.$selected}">
                 <div class="cell">
                     <div *ngIf="pawns[i][j]?.$type === 1">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-play fa-3x"></i>
-                        <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}}</p>
+                        <p class="movement"><i class="fa fa-location-arrow"></i> {{pawns[i][j].$currentMovement}}/{{pawns[i][j].$maxMovement}}</p>
+                        <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}} <i class="fa fa-heart"></i></p>
                     </div>
                     <div *ngIf="pawns[i][j]?.$type === 2">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-circle fa-3x"></i>
-                        <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}}</p>
+                        <p class="movement"><i class="fa fa-location-arrow"></i> {{pawns[i][j].$currentMovement}}/{{pawns[i][j].$maxMovement}}</p>
+                        <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}} <i class="fa fa-heart"></i></p>
                     </div>
                     <div *ngIf="pawns[i][j]?.$type === 3">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-square fa-3x"></i>
-                        <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}}</p>
+                        <p class="movement"><i class="fa fa-location-arrow"></i> {{pawns[i][j].$currentMovement}}/{{pawns[i][j].$maxMovement}}</p>
+                        <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}} <i class="fa fa-heart"></i></p>
                     </div>
                     <div *ngIf="!pawns[i][j]">
                         <span class="to-hide">

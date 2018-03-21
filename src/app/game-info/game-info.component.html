@@ -1,6 +1,13 @@
 <div class="card border-success">
     <div class="card-header text-center">Informations sur la partie</div>
     <div class="card-body">
-        <p class="card-text">Tour du joueur : {{currentPlayer}}</p>
+        <div class="row">
+            <div class="col-6">
+                <p class="player-turn">Tour du joueur : {{currentPlayer}}</p>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-outline-secondary" (click)="endTurn()">Fin du tour</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -45,9 +45,9 @@ export class GameboardComponent implements OnInit {
 
     onCellClicked(i: number, j: number) {
 
-        this.handleNewPawn(i, j)
-
         this.handlePawnSelected(i, j);
+
+        this.handleNewPawn(i, j)
 
         this.handlePawnMovement(i, j);
 
@@ -69,8 +69,6 @@ export class GameboardComponent implements OnInit {
 
                 this.pawns[iOld][jOld].$selected = false;
                 this.userInputService.setPawnSelected(false);
-
-                this.gameInfoService.switchPlayer();
             }
         }
 
@@ -105,19 +103,24 @@ export class GameboardComponent implements OnInit {
             if (!this.pawns[i][j] && this.isAValidMovement(i, j, iOld, jOld)) {
                 // "move" the pawn
                 this.pawns[i][j] = this.selectedPawn['pawn'];
+                console.log("ij", i, j);
+                console.log("ij old", iOld, jOld);
+                console.log("mov", this.pawns[i][j].$currentMovement);
+                console.log("mov old", this.pawns[iOld][jOld].$currentMovement);
+                // TODO : à vérifier
+                this.pawns[iOld][jOld].$currentMovement--;
                 this.pawns[i][j].$selected = false;
 
                 // remove reference to the "old" pawn
                 this.pawns[iOld][jOld] = null;
                 this.userInputService.setPawnSelected(false);
-
-                this.gameInfoService.switchPlayer();
             }
         }
     }
 
     isAValidMovement(i: number, j: number, iOld: number, jOld: number): boolean {
-        return (Math.abs(i - iOld) == 1 && Math.abs(j - jOld) == 0) || (Math.abs(i - iOld) == 0 && Math.abs(j - jOld) == 1);
+        return ((Math.abs(i - iOld) == 1 && Math.abs(j - jOld) == 0) || (Math.abs(i - iOld) == 0 && Math.abs(j - jOld) == 1))
+               && this.pawns[iOld][jOld].$currentMovement > 0;
     }
 
     handlePawnSelected(i: number, j: number) {
@@ -151,12 +154,12 @@ export class GameboardComponent implements OnInit {
 
             if (this.gameInfoService.getCurrentPlayer() == 1) {
                 // If it's the "right" side (bottom side)
-                if (i >= 3) {
+                if (i >= (this.setupService.getRows() / 2)) {
                     rightSide = true;
                 }
             } else {
                 // If it's the "right" side (top side)
-                if (i < 3) {
+                if (i < (this.setupService.getRows() / 2)) {
                     rightSide = true;
                 }
             }
@@ -166,8 +169,6 @@ export class GameboardComponent implements OnInit {
                 // ... place the pawn on that cell
                 this.pawns[i][j] = p;
                 this.userInputService.setNewPawnSelected(false);
-                // Change the current player
-                this.gameInfoService.switchPlayer()
             }
         }
     }

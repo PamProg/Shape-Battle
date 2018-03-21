@@ -21,4 +21,8 @@ export class GameInfoComponent implements OnInit {
         this.currentPlayer = this.gameInfoService.getCurrentPlayer();
     }
 
+    endTurn() {
+        this.gameInfoService.switchPlayer();
+    }
+
 }
