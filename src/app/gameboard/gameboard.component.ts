@@ -64,31 +64,52 @@ export class GameboardComponent implements OnInit {
                 this.contactAttack(this.selectedPawn['pawn'], this.pawns[i][j], i, j);
 
                 if (this.pawns[i][j].$currentLife <= 0) {
-                    this.pawns[i][j] = null;
+                    this.pawns[i][j] = this.newNullPawn();
                 }
 
                 this.pawns[iOld][jOld].$selected = false;
                 this.userInputService.setPawnSelected(false);
+            } else if (!this.isCurrentPlayerPawn(i, j) && this.isAValidRangeAttack(i, j, iOld, jOld)) {
+
             }
         }
 
     }
 
 
+
     contactAttack(attackingPawn: Pawn, targetPawn: Pawn, i: number, j: number) {
-        const diff = attackingPawn.$contactAtk - targetPawn.$defense;
-        const dmg = diff > 0 ? attackingPawn.$contactAtk - targetPawn.$defense : 0;
 
-        this.pawns[i][j].$currentLife -= dmg;
+        if (attackingPawn && targetPawn) {
+            const diff = attackingPawn.$contactAtk - targetPawn.$defense;
+            const dmg = diff > 0 ? attackingPawn.$contactAtk - targetPawn.$defense : 0;
 
-        this.selectedPawn = null;
+            this.pawns[i][j].$currentLife -= dmg;
+
+            this.selectedPawn = this.resetSelectedPawn();
+        } else {
+            // console.log("Error : attackingPawn or targetPawn undefined");
+        }
+
+
     }
 
     isAValidContactAttack(i: number, j: number, iOld: number, jOld: number): boolean {
+        console.log("valid contact atk", this.pawns[i][j]);
+        if (this.pawns[i][j] &&
+            (Math.abs(i - iOld) == 1 && Math.abs(j - jOld) == 0) || (Math.abs(i - iOld) == 0 && Math.abs(j - jOld) == 1)) {
+            return true;
+        } else {
+            // console.log("Error : this.pawns[i][j] undefined");
+            return false;
+        }
+    }
+
+    isAValidRangeAttack(i: number, j: number, iOld: number, jOld: number): boolean {
         if (this.pawns[i][j]) {
             return true;
         } else {
-            console.log("Error : this.pawns[i][j] undefined");
+            // console.log("Error : this.pawns[i][j] undefined");
             return false;
         }
     }
@@ -103,16 +124,15 @@ export class GameboardComponent implements OnInit {
             if (!this.pawns[i][j] && this.isAValidMovement(i, j, iOld, jOld)) {
                 // "move" the pawn
                 this.pawns[i][j] = this.selectedPawn['pawn'];
-                console.log("ij", i, j);
-                console.log("ij old", iOld, jOld);
-                console.log("mov", this.pawns[i][j].$currentMovement);
-                console.log("mov old", this.pawns[iOld][jOld].$currentMovement);
-                // TODO : à vérifier
-                this.pawns[iOld][jOld].$currentMovement--;
+
+                // TODO : CHECK THIS
+                this.pawns[i][j].$currentMovement--;
+                // this.pawns[iOld][jOld].$currentMovement--; 
                 this.pawns[i][j].$selected = false;
 
                 // remove reference to the "old" pawn
-                this.pawns[iOld][jOld] = null;
+                this.pawns[iOld][jOld] = this.newNullPawn();
+                this.selectedPawn = this.resetSelectedPawn();
                 this.userInputService.setPawnSelected(false);
             }
         }
@@ -120,20 +140,24 @@ export class GameboardComponent implements OnInit {
 
     isAValidMovement(i: number, j: number, iOld: number, jOld: number): boolean {
         return ((Math.abs(i - iOld) == 1 && Math.abs(j - jOld) == 0) || (Math.abs(i - iOld) == 0 && Math.abs(j - jOld) == 1))
-               && this.pawns[iOld][jOld].$currentMovement > 0;
+            && this.pawns[iOld][jOld].$currentMovement > 0;
     }
 
     handlePawnSelected(i: number, j: number) {
+
+        // If the pawn exists AND it's a "current player" pawn AND there is no new pawn selected
         if (this.pawns[i][j] && this.isCurrentPlayerPawn(i, j) && !this.userInputService.isNewPawnSelected()) {
 
             // If the pawn is already selected
-            if (this.userInputService.isPawnSelected()) {
+            if (this.pawns[i][j].$selected) {
                 // deselect it
-                this.userInputService.setPawnSelected(false);
-                this.selectedPawn = null;
+                this.selectedPawn = this.resetSelectedPawn();
                 this.pawns[i][j].$selected = false;
+                this.userInputService.setPawnSelected(false);
 
-            } else {
+                // If another pawn is not already selected
+            } else if (this.selectedPawn['pawn'] == null) {
+                // selected it
                 this.selectedPawn = {
                     "pawn": this.pawns[i][j],
                     "i": i,
@@ -141,7 +165,7 @@ export class GameboardComponent implements OnInit {
                 }
                 this.pawns[i][j].$selected = true;
                 this.userInputService.setPawnSelected(true);
-            }
+            } // else : do nothing
 
         }
     }
@@ -177,9 +201,21 @@ export class GameboardComponent implements OnInit {
         if (this.pawns[i][j]) {
             return this.pawns[i][j].$owner == this.gameInfoService.getCurrentPlayer();
         } else {
-            console.log("Error : this.pawns[i][j] undefined");
+            // console.log("Error : this.pawns[i][j] undefined");
             return false;
         }
+    }
+
+    resetSelectedPawn() {
+        return {
+            "pawn": null,
+            "i": null,
+            "j": null
+        }
+    }
+
+    newNullPawn() {
+        return new Pawn(null, null, null, null, null, null, null, null, null, null, null, null, null)
     }
 
 }

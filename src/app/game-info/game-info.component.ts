@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameInfoService } from '../service/game-info.service';
+import { UserInputService } from '../service/user-input.service';
 
 @Component({
     selector: 'app-game-info',
@@ -10,7 +11,8 @@ export class GameInfoComponent implements OnInit {
 
     currentPlayer: number;
 
-    constructor(private gameInfoService: GameInfoService) {
+    constructor(private gameInfoService: GameInfoService,
+        private userInputService: UserInputService) {
         this.gameInfoService.currentPlayerObservable.subscribe(player => {
             this.currentPlayer = player;
         })
@@ -22,7 +24,9 @@ export class GameInfoComponent implements OnInit {
     }
 
     endTurn() {
-        this.gameInfoService.switchPlayer();
+        if (!this.userInputService.isPawnSelected() && !this.userInputService.isNewPawnSelected()) {
+            this.gameInfoService.switchPlayer();
+        }
     }
 
 }
