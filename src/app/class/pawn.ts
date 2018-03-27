@@ -6,7 +6,7 @@ export class Pawn {
     private owner: number;
 
     private contactAtk: number;
-    private rangeAtk: number;
+    private rangedAtk: number;
     private defense: number;
     private currentLife: number;
     private maxLife: number;
@@ -19,7 +19,7 @@ export class Pawn {
     private selected: boolean;
 
 
-    constructor($name: string, $type: number, $owner: number, $contactAtk: number, $rangeAtk: number, $defense: number,
+    constructor($name: string, $type: number, $owner: number, $contactAtk: number, $rangedAtk: number, $defense: number,
         $currentLife: number, $maxLife: number, $currentMovement: number, $maxMovement: number, $level: number, $exp: number,
         $selected: boolean) {
 
@@ -27,7 +27,7 @@ export class Pawn {
         this.type = $type;
         this.owner = $owner;
         this.contactAtk = $contactAtk;
-        this.rangeAtk = $rangeAtk;
+        this.rangedAtk = $rangedAtk;
         this.defense = $defense;
         this.currentLife = $currentLife;
         this.maxLife = $maxLife;
@@ -73,12 +73,12 @@ export class Pawn {
     }
 
 
-    public get $rangeAtk(): number {
-        return this.rangeAtk;
+    public get $rangedAtk(): number {
+        return this.rangedAtk;
     }
 
-    public set $rangeAtk(value: number) {
-        this.rangeAtk = value;
+    public set $rangedAtk(value: number) {
+        this.rangedAtk = value;
     }
 
 

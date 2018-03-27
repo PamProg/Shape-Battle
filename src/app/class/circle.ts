@@ -2,9 +2,9 @@ import { Pawn } from './pawn'
 
 export class Circle extends Pawn {
 
-	constructor(owner: number, level: number) {
+    constructor(owner: number, level: number) {
 
-        switch(level) {
+        switch (level) {
             case 1:
                 super("circle", 2, owner, 1, 2, 1, 3, 3, 1, 1, level, 0, false)
                 break;
@@ -16,6 +16,6 @@ export class Circle extends Pawn {
                 break;
         }
 
-	}
-    
+    }
+
 }
