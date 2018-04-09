@@ -25,6 +25,9 @@ export class GameInfoComponent implements OnInit {
 
     endTurn() {
         if (!this.userInputService.isPawnSelected() && !this.userInputService.isNewPawnSelected()) {
+
+            this.gameInfoService.resetPawns();
+
             this.gameInfoService.switchPlayer();
         }
     }

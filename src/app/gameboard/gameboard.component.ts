@@ -23,6 +23,10 @@ export class GameboardComponent implements OnInit {
         private gameInfoService: GameInfoService,
         private setupService: SetupService) {
 
+            this.gameInfoService.pawnsObservable.subscribe(pawns => {
+                this.pawns = pawns;
+            })
+
     }
 
     ngOnInit() {
@@ -55,6 +59,9 @@ export class GameboardComponent implements OnInit {
         this.handlePawnMovement(i, j);
 
         this.handlePawnAttack(i, j);
+
+        // Do this everytime we update the pawns variable ? Not only here ?
+        this.gameInfoService.setPawns(this.pawns);
     }
 
     handlePawnAttack(i: number, j: number) {
