@@ -10,8 +10,12 @@ export class Pawn {
     private defense: number;
     private currentLife: number;
     private maxLife: number;
+
     private currentMovement: number;
     private maxMovement: number;
+
+    private currentNbAttacks: number;
+    private maxNbAttacks: number;
 
     private level: number;
     private exp: number;
@@ -19,9 +23,11 @@ export class Pawn {
     private selected: boolean;
 
 
+
+
     constructor($name: string, $type: number, $owner: number, $contactAtk: number, $rangedAtk: number, $defense: number,
-        $currentLife: number, $maxLife: number, $currentMovement: number, $maxMovement: number, $level: number, $exp: number,
-        $selected: boolean) {
+        $currentLife: number, $maxLife: number, $currentMovement: number, $maxMovement: number, $currentNbAttacks: number, 
+        $maxNbAttacks: number, $level: number, $exp: number, $selected: boolean) {
 
         this.name = $name;
         this.type = $type;
@@ -33,6 +39,8 @@ export class Pawn {
         this.maxLife = $maxLife;
         this.currentMovement = $currentMovement;
         this.maxMovement = $maxMovement;
+        this.currentNbAttacks = $currentNbAttacks;
+        this.maxNbAttacks = $maxNbAttacks;
         this.level = $level;
         this.exp = $exp;
         this.selected = $selected;
@@ -124,6 +132,24 @@ export class Pawn {
 
     public set $maxMovement(value: number) {
         this.maxMovement = value;
+    }
+
+
+    public get $currentNbAttacks(): number {
+        return this.currentNbAttacks;
+    }
+
+    public set $currentNbAttacks(value: number) {
+        this.currentNbAttacks = value;
+    }
+
+
+    public get $maxNbAttacks(): number {
+        return this.maxNbAttacks;
+    }
+
+    public set $maxNbAttacks(value: number) {
+        this.maxNbAttacks = value;
     }
 
 

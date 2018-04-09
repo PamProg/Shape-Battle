@@ -9,16 +9,25 @@
                 <div class="cell">
                     <div *ngIf="pawns[i][j]?.$type === 1">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-play fa-3x"></i>
+                        <p class="contactAtk"><i class="fa fa-bolt"></i> {{pawns[i][j].$contactAtk}}</p>
+                        <p class="rangedAtk"><i class="fa fa-crosshairs"></i> {{pawns[i][j].$rangedAtk}}</p>
+                        <p class="defense">{{pawns[i][j].$defense}} <i class="fa fa-shield"></i></p>
                         <p class="movement"><i class="fa fa-location-arrow"></i> {{pawns[i][j].$currentMovement}}/{{pawns[i][j].$maxMovement}}</p>
                         <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}} <i class="fa fa-heart"></i></p>
                     </div>
                     <div *ngIf="pawns[i][j]?.$type === 2">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-circle fa-3x"></i>
+                        <p class="contactAtk"><i class="fa fa-bolt"></i> {{pawns[i][j].$contactAtk}}</p>
+                        <p class="rangedAtk"><i class="fa fa-crosshairs"></i> {{pawns[i][j].$rangedAtk}}</p>
+                        <p class="defense">{{pawns[i][j].$defense}} <i class="fa fa-shield"></i></p>
                         <p class="movement"><i class="fa fa-location-arrow"></i> {{pawns[i][j].$currentMovement}}/{{pawns[i][j].$maxMovement}}</p>
                         <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}} <i class="fa fa-heart"></i></p>
                     </div>
                     <div *ngIf="pawns[i][j]?.$type === 3">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-square fa-3x"></i>
+                        <p class="contactAtk"><i class="fa fa-bolt"></i> {{pawns[i][j].$contactAtk}}</p>
+                        <p class="rangedAtk"><i class="fa fa-crosshairs"></i> {{pawns[i][j].$rangedAtk}}</p>
+                        <p class="defense">{{pawns[i][j].$defense}} <i class="fa fa-shield"></i></p>
                         <p class="movement"><i class="fa fa-location-arrow"></i> {{pawns[i][j].$currentMovement}}/{{pawns[i][j].$maxMovement}}</p>
                         <p class="life">{{pawns[i][j].$currentLife}}/{{pawns[i][j].$maxLife}} <i class="fa fa-heart"></i></p>
                     </div>
