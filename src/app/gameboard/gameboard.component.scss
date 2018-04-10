@@ -24,7 +24,7 @@
 	display: table-cell;
     padding: 20px 40px;
 
-    position: relative; // Useful to have .life {position: absolute}
+    position: relative; // Useful to have .life (and other attributes) {position: absolute}
 }
 
 .to-hide {
@@ -40,6 +40,56 @@
 }
 
 // ----- END Building the grid 
+
+
+
+@media (max-width: 576px) {
+
+    // ----- Building the grid 
+
+    .board {
+        position: relative;
+        left: 20%;
+    
+        display: table;
+        width: 5%;
+    
+        border: 3px solid rgb(40, 40, 40);
+    }
+    
+    .board-game {
+        display: table-row-group;
+    }
+    
+    .board-row {
+        display: table-row;
+    }
+    
+    .board-cell {
+        border: 2px solid #999999;
+        display: table-cell;
+        padding: 8px 16px;
+    
+        position: relative; // Useful to have .life (and other attributes) {position: absolute}
+    }
+    
+    .frontier-bottom {
+        border-bottom: 3px solid purple;
+    }
+    
+    .frontier-top {
+        border-top: 3px solid purple;
+    }
+
+    // ----- END Building the grid 
+
+    i, p {
+        // font-size: 5vw;
+        font-size: 0.55em;
+        // font-weight: 0.1em;
+    }
+    
+}
 
 
 .over-pawn:hover {
@@ -58,6 +108,17 @@
 
 .player-two {
     color: red;
+}
+
+.no-attacks-left {
+
+    .player-one {
+        color: rgba(0, 128, 0, 0.4);
+    }
+    
+    .player-two {
+        color: rgba(255, 0, 0, 0.4);
+    }
 }
 
 

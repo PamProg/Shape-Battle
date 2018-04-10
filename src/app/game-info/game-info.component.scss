@@ -2,3 +2,13 @@
 .player-turn {
     margin-top: 6px;
 }
+
+
+@media (max-width: 576px) {
+
+    i, p, .card-header, .btn {
+        // font-size: 5vw;
+        font-size: 0.55em;
+        // font-weight: 0.1em;
+    }
+}

@@ -5,7 +5,8 @@
                                     [ngClass]="{'frontier-bottom': i == (this.setupService.getRows() / 2)-1, 
                                                 'frontier-top': i == (this.setupService.getRows() / 2), 
                                                 'over-pawn': pawns[i][j] && !pawns[i][j]?.$selected && isCurrentPlayerPawn(i, j),
-                                                'pawn-selected': pawns[i][j]?.$selected}">
+                                                'pawn-selected': pawns[i][j]?.$selected,
+                                                'no-attacks-left': pawns[i][j]?.$currentNbAttacks == 0}">
                 <div class="cell">
                     <div *ngIf="pawns[i][j]?.$type === 1">
                         <i [ngClass]="(pawns[i][j]?.$owner == 1 ) ? 'player-one' : 'player-two'" class="fa fa-play fa-3x"></i>

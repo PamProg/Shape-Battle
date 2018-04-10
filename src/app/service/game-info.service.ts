@@ -52,12 +52,14 @@ export class GameInfoService {
         for (let i = 0; i < this.setupService.getRows(); i++) {
             for (let j = 0; j < this.setupService.getColumns(); j++) {
                 if (this.pawns[i][j] != null) {
+                    // Reset movement
                     this.pawns[i][j].$currentMovement = this.pawns[i][j].$maxMovement;
+                    // Reset nb attacks
+                    this.pawns[i][j].$currentNbAttacks = this.pawns[i][j].$maxNbAttacks;
                 }
             }
         }
 
-        // TODO : add reset nb atks
     }
 
 }

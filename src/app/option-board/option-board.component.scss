@@ -8,3 +8,17 @@
 .cursorAuto:hover {
     cursor: auto;
 }
+
+
+@media (max-width: 576px) {
+
+    i, p {
+        // font-size: 5vw;
+        font-size: 1em;
+        // font-weight: 0.1em;
+    }
+    
+    .card-header {
+        font-size: 0.55em;
+    }
+}

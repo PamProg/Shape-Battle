@@ -78,6 +78,8 @@ export class GameboardComponent implements OnInit {
                 if (this.isAValidContactAttack(i, j, iOld, jOld)) {
                     this.contactAttack(this.selectedPawn['pawn'], this.pawns[i][j], i, j);
     
+                    this.pawns[iOld][jOld].$currentNbAttacks--;
+
                     if (this.pawns[i][j].$currentLife <= 0) {
                         this.pawns[i][j] = null;
                     }
@@ -86,11 +88,13 @@ export class GameboardComponent implements OnInit {
                     this.userInputService.setPawnSelected(false);
                 } else if (this.isAValidRangedAttack(i, j, iOld, jOld)) {
                     this.rangedAttack(this.selectedPawn['pawn'], this.pawns[i][j], i, j);
+
+                    this.pawns[iOld][jOld].$currentNbAttacks--;
     
                     if (this.pawns[i][j].$currentLife <= 0) {
                         this.pawns[i][j] = null;
                     }
-    
+
                     this.pawns[iOld][jOld].$selected = false;
                     this.userInputService.setPawnSelected(false);
                 }
@@ -128,7 +132,7 @@ export class GameboardComponent implements OnInit {
     }
 
     isAValidContactAttack(i: number, j: number, iOld: number, jOld: number): boolean {
-        if (this.pawns[i][j] &&
+        if (this.pawns[i][j] && this.pawns[iOld][jOld].$currentNbAttacks > 0 &&
             ((Math.abs(i - iOld) == 1 && Math.abs(j - jOld) == 0) || (Math.abs(i - iOld) == 0 && Math.abs(j - jOld) == 1))) {
             return true;
         } else {
@@ -138,7 +142,7 @@ export class GameboardComponent implements OnInit {
     }
 
     isAValidRangedAttack(i: number, j: number, iOld: number, jOld: number): boolean {
-        if (this.pawns[i][j] &&
+        if (this.pawns[i][j] && this.pawns[iOld][jOld].$currentNbAttacks > 0 &&
             ((Math.abs(i - iOld) == 2 && Math.abs(j - jOld) == 0) || (Math.abs(i - iOld) == 0 && Math.abs(j - jOld) == 2))) {
             return true;
         } else {
